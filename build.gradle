@@ -1,0 +1,55 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.8.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url 'http://repo.spring.io/snapshot' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE')
+        classpath('org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1')
+        classpath('io.spring.platform:platform-bom:2.0.1.RELEASE')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'application'
+apply plugin: 'io.spring.dependency-management'
+
+jar {
+    baseName = 'bootquartz-demo'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'http://repo.spring.io/snapshot' }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-netflix:1.0.7.RELEASE'
+    }
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-parent')
+    compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
+    compile('mysql:mysql-connector-java:5.1.35')
+    compile('org.springframework:spring-context-support')
+    compile('org.quartz-scheduler:quartz:2.2.1')
+    compile('org.quartz-scheduler:quartz-jobs:2.2.1')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
