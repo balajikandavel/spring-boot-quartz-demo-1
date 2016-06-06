@@ -46,9 +46,9 @@ public class QuartzConfig {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         // this allows to update triggers in DB when updating settings in config file:
         factory.setOverwriteExistingJobs(true);
-        factory.setDataSource(dataSource);
+        // factory.setDataSource(dataSource);
         factory.setJobFactory(jobFactory);
-        
+
         factory.setTriggers(sampleJobTrigger, cronJobTrigger);
 
         return factory;
